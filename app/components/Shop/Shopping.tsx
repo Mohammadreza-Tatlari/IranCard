@@ -3,48 +3,78 @@ import ListingCard from './ListingCard'
 
 const dataSample = [
   {
-    name: 'name1',
+    title:"200",
+    price: 10,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
+    
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
+    
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
+    
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
+    
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
+    
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
   },
   {
-    name: 'name1',
+    title:"500",
+    price: 20,
+    discount: {
+    isDiscounted: true ,
+    amount: 20} 
+    
   },
-  {
-    name: 'name1',
-  },
-  {
-    name: 'name1',
-  },
-  {
-    name: 'name1',
-  },
-  {
-    name: 'name1',
-  },
+  
 ]
 export default function Shopping() {
   return (
     <>
-      <div className='pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
+      <div className='pt-24 grid grid-cols-1 mx-16 xl:mx-44 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8'>
       {dataSample.map((data) => (
-        <ListingCard key={data.name}/>
+        <ListingCard key={data.title}
+        title={data.title}
+        price={data.price}
+        discount={data.discount}/>
         ))}
         </div>
     </>

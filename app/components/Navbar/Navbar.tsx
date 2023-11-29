@@ -1,11 +1,13 @@
 "use client";
 
+import useLoginModal from "@/app/hooks/useLoginModal";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [HumbergerMenu, setHumbergerMenu] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const loginModal = useLoginModal()
 
   function handleHumbergerMenu() {
     setHumbergerMenu(!HumbergerMenu);
@@ -23,6 +25,12 @@ export default function Navbar() {
       window.removeEventListener("resize", isMobileSized);
     };
   }, []); // Empty dependency array means this effect runs once after the initial render
+
+  const toggleLogin = () => {
+    loginModal.onOpen()
+    console.log("isOpen is" ,loginModal.isOpen);
+    
+  }
 
   return (
     <nav className="z-50 bg-black text-white border-gray-200 dark:bg-black dark:border-black mb-2">
@@ -75,6 +83,15 @@ export default function Navbar() {
                 className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto md:hover:border-b-2 focus:text-white "
               >
                 Forum
+              </a>
+            </li>
+            <li>
+              <a
+              onClick={toggleLogin}
+                href="#"
+                className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto md:hover:border-b-2 focus:text-white "
+              >
+                Login Test
               </a>
             </li>
             <li>

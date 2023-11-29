@@ -1,7 +1,20 @@
 import Image from "next/image";
 import React from "react";
 
-export default function ListingCard() {
+interface ListingCardProps {
+  title: string;
+  price: number;
+  discount: {
+    isDiscounted: boolean;
+    amount: number;
+  };
+}
+
+export default function ListingCard({
+  title,
+  price,
+  discount,
+}: ListingCardProps) {
   return (
     <>
       <div className="col-span-1 cursor-pointer group">
@@ -14,10 +27,13 @@ export default function ListingCard() {
               fill
             />
             <div className="absolute top-3 right-3">
-              <span className="font-bold text-white">25% OFF</span>
+              {discount.isDiscounted && (
+                <span className="font-bold text-white">{discount.amount}% OFF</span>
+              )}
             </div>
           </div>
-          <div className="font-semibold text-lg">TOKEN NAME</div>
+          <div className="font-semibold text-lg">{title}</div>
+          <div className="font-semibold">${price}</div>
         </div>
       </div>
     </>

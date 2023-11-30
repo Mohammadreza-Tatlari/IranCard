@@ -24,8 +24,10 @@ export default function RootLayout({
         <ClientOnly>
         <Navbar />
         <LoginModal />
-        </ClientOnly>   
+        </ClientOnly>  
+        <div className=""> 
         {children}
+        </div>
         </body>
     </html>
   )

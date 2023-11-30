@@ -33,10 +33,8 @@ export default function LoginModal() {
       return null;
     }
     // setShowModal(false)
-    setTimeout(() => {
       loginModal.onClose();
       console.log(loginModal.isOpen);
-    }, 300);
   }, [isLoading, loginModal]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -82,20 +80,13 @@ export default function LoginModal() {
                     required
                   />
                   <Input
-                    id="password"
-                    label="password"
+                    id="number"
+                    label="mobile number"
                     disabled={isLoading}
                     register={register}
                     errors={errors}
                     required
                   />
-                  <div className="flex flex-row gap-1">
-                    <p>show Password</p>
-                    <input
-                      type="checkbox"
-                      onClick={() => setShowpass(!setShowpass)}
-                    />
-                  </div>
                 </div>
                 {/* End Of Body */}
               </div>

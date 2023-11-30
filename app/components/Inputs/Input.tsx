@@ -30,15 +30,12 @@ export default function Input({
           // space is for better floating animation
           placeholder=" "
           type={type}
-          //it is peer class because it has sibling and can control the label beside input actions
-          className={`peer w-full p-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-60 disabled:cursor-not-allowed
-       
+          className={`peer w-full p-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-60 disabled:cursor-not-allowed pl-4 
         ${errors[id] ? `border-slate-600` : `border-neutral-300`}
         ${errors[id] ? `focus:border-rose-500` : `focus:border-black`}`}
         />
         <label
-          className={`absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0]
-       
+          className={`absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4
         peer-placeholder-shown:scale-100
         peer-placeholder-shown:translate-y-0
         peer-focus:scale-75

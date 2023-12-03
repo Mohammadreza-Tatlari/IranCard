@@ -1,8 +1,9 @@
 import React from 'react'
 import ListingCard from './ListingCard'
 
-const dataSample = [
+export const dataSample = [
   {
+    id: "1",
     title:"200",
     price: 1000,
     discount: {
@@ -10,6 +11,7 @@ const dataSample = [
     amount: 20} 
   },
   {
+    id: "2",
     title:"500",
     price: 200000,
     discount: {
@@ -18,6 +20,7 @@ const dataSample = [
     
   },
   {
+    id: "3",
     title:"500",
     price: 30000,
     discount: {
@@ -26,6 +29,7 @@ const dataSample = [
     
   },
   {
+    id: "4",
     title:"500",
     price: 40000,
     discount: {
@@ -34,6 +38,7 @@ const dataSample = [
     
   },
   {
+    id: "5",
     title:"500",
     price: 450000,
     discount: {
@@ -42,6 +47,7 @@ const dataSample = [
     
   },
   {
+    id: "6",
     title:"500",
     price: 3600000,
     discount: {
@@ -50,6 +56,7 @@ const dataSample = [
     
   },
   {
+    id: "7",
     title:"500",
     price: 2420000,
     discount: {
@@ -57,6 +64,7 @@ const dataSample = [
     amount: 20} 
   },
   {
+    id: "8",
     title:"500",
     price: 500000,
     discount: {
@@ -69,9 +77,10 @@ const dataSample = [
 export default function Shopping() {
   return (
     <>
-      <div className='pt-24 grid grid-cols-1 mx-16 xl:mx-44 2xl:mx-72 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+      <div className='grid grid-cols-1 mx-16 xl:mx-44 2xl:mx-72 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3'>
       {dataSample.map((data) => (
         <ListingCard key={data.title}
+        itemId={data.id}
         title={data.title}
         price={data.price}
         discount={data.discount}/>

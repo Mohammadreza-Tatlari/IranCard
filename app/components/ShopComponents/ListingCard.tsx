@@ -1,7 +1,10 @@
+'use client'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface ListingCardProps {
+  itemId: string;
   title: string;
   price: number;
   discount: {
@@ -11,13 +14,19 @@ interface ListingCardProps {
 }
 
 export default function ListingCard({
+  itemId,
   title,
   price,
   discount,
 }: ListingCardProps) {
+
+  const router = useRouter()
+
+
   return (
     <>
-      <div className="col-span-1 cursor-pointer group">
+      <div className="col-span-1 cursor-pointer group hover:bg-black hover:text-slate-50 p-3 rounded-lg transition"
+      onClick={() => router.push(`Items/${itemId}`)}>
         <div className="flex flex-col gap-2 w-full">
           <div className="aspect-square w-full relative overflow-hidden rounded-md">
             <Image

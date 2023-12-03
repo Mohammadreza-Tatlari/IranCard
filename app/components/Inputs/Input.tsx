@@ -14,7 +14,7 @@ interface InputProps {
 export default function Input({
   id,
   label,
-  type,
+  type = 'text',
   disabled,
   required,
   register,

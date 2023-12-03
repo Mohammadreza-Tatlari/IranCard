@@ -3,11 +3,15 @@
 import useLoginModal from "@/app/hooks/useLoginModal";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+
 
 export default function Navbar() {
   const [HumbergerMenu, setHumbergerMenu] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const loginModal = useLoginModal();
+  const router = useRouter()
 
   function handleHumbergerMenu() {
     setHumbergerMenu(!HumbergerMenu);
@@ -70,15 +74,15 @@ export default function Navbar() {
           <ul className="flex flex-col md:items-center font-medium p-4 md:p-0 mt-4 rounded-sm bg-black md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-black border-black">
             <li>
               <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto md:hover:border-b-2 focus:text-white "
+                onClick={() => router.push('/') }
+                className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto hover:cursor-pointer md:hover:border-b-2 focus:text-white "
               >
                 Home
               </a>
             </li>
             <li>
               <a
-                href="#"
+                href="https://forum.iranmta.ir/" target="_blank"
                 className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto md:hover:border-b-2 focus:text-white "
               >
                 Forum
@@ -86,8 +90,8 @@ export default function Navbar() {
             </li>
             <li>
               <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto md:hover:border-b-2 focus:text-white "
+                onClick={() => router.push('/Shop') }
+                className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto md:hover:border-b-2 hover:cursor-pointer focus:text-white "
               >
                 Shop
               </a>

@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Button from "../Button";
+import { useRouter } from "next/navigation";
 
 interface PurchaseProps {
   title?: string;
@@ -20,10 +21,20 @@ export default function PurchaseModal({
   id,
   discountAmount,
 }: PurchaseProps) {
+
+  const router = useRouter();
   //for registeration will be used
   const [isLoading, setIsloading] = useState(false);
   const [step, setStep] = useState(STEPS.Authentication);
 
+  //needs revision this useEffect cleanup the states when user close the Component
+  useEffect(() => {
+    return () => {
+      setStep(0);
+      setIsloading(false)
+    }
+  }, [])
+  
   let bodyContent;
 
   if (step == STEPS.PurchaseFactor) {
@@ -62,7 +73,6 @@ export default function PurchaseModal({
           <Button
             label="احراض حویت"
             onClick={() => {
-              console.log("Purchase Clicked");
               setStep(STEPS.Authentication);
             }}
           />
@@ -119,6 +129,8 @@ export default function PurchaseModal({
                   className="p-1 border-0 hover:opacity-70 transition absolute left-9"
                   onClick={() => {
                     console.log("close Purchase is clicked");
+                    router.push('/Shop')
+
                   }}
                 >
                   <svg

@@ -6,7 +6,6 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
 import useLoginModal from "@/app/hooks/useLoginModal";
-import Cookies from "js-cookie";
 import useUserState from "@/app/hooks/useUserState";
 
 interface PurchaseProps {

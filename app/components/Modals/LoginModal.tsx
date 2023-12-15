@@ -1,19 +1,30 @@
 "use client";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-
+import Cookies from "js-cookie";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useUserState from "@/app/hooks/useUserState";
 
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import Button from "../Button";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function LoginModal() {
   const loginModal = useLoginModal();
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [isInputWrong, setIsInputWrong] = useState<boolean>(false);
+  //this will save username after loggin
+  // const [receivedData , setReceivedData] = useState<any>()
+  const userState = useUserState();
+
+  var inOneDay = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  //var inOneMinute = new Date(new Date().getTime() + 1 * 60 * 1000); //for testing
+
   const {
     register,
     handleSubmit,
@@ -34,18 +45,78 @@ export default function LoginModal() {
     }
     // setShowModal(false)
     loginModal.onClose();
-    console.log(loginModal.isOpen);
+    
   }, [isLoading, loginModal]);
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsloading(true);
-    //here is where the API call that sends data to backend should be set
-  };
+  
 
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    setIsloading(true);
+    console.log(data);
+    //here is where the API call that sends data to backend should be set
+    try {
+      const response = await axios({
+        url: `${process.env.NEXT_PUBLIC_IRANMTAURL}/auth/login`,
+        method: "POST",
+        data: {
+          username: data.name,
+          password: data.password,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 201) {
+        const userToken = response.data.jwt;
+        const userName = response.data.Name;
+        const needToVerify = response.data.needToVerify;
+        //WARNING
+        //THE JWT ARE ACCESSIBLE FROM CLIENT SIDE. POTENTIAL OF XSS ATTACKS
+        Cookies.set("JWTToken", userToken, {
+          expires: inOneDay,
+          secure: true,
+          httpOnly: false,
+        });
+        Cookies.set("userName", userName, {
+          expires: inOneDay,
+          secure: true,
+          httpOnly: false,
+        });
+        Cookies.set("needToVerify", needToVerify, {
+          expires: inOneDay,
+          secure: true,
+          httpOnly: false,
+        });
+
+        loginModal.onClose();
+        toast.success("خوش آمدین", { duration: 1500 });
+        setTimeout(hardReload, 1500);
+      } else {
+        console.error("Login Failed with status:", response.status);
+      }
+    } catch (error: any) {
+      console.error("Error during API call", error);
+      if (error.response.status == 401) {
+        toast.error("اطلاعات وارد شده اشتباه است");
+        setIsInputWrong(true);
+      }
+    }
+
+    setIsloading(false);
+  };
+  function hardReload() {
+    window.location.reload();
+  }
+  //for showing and hiding password
   const toggleShowPass = useCallback(() => {
     setShowPassword(!showPassword);
   }, [showPassword]);
-  //for showing and hiding password
+
+  function handleInputChanged() {
+    setIsInputWrong(false);
+  }
+
   return (
     <>
       {loginModal.isOpen && (
@@ -56,7 +127,7 @@ export default function LoginModal() {
                 loginModal.isOpen ? "translate-y-0" : "translate-y-100"
               } ${loginModal.isOpen ? "opacity-100" : "opacity-0"}`}
             >
-              <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-600 text-white outline-none focus:outline-none">
                 <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
                   <button
                     className="p-1 border-0 hover:opacity-70 transition absolute left-9"
@@ -80,6 +151,8 @@ export default function LoginModal() {
                         disabled={isLoading}
                         register={register}
                         errors={errors}
+                        isInputWrong={isInputWrong}
+                        InputChanged={handleInputChanged}
                         required
                       />
                       <Input
@@ -88,6 +161,8 @@ export default function LoginModal() {
                         disabled={isLoading}
                         register={register}
                         errors={errors}
+                        isInputWrong={isInputWrong}
+                        InputChanged={handleInputChanged}
                         type={showPassword ? "password" : ""}
                         required
                       />
@@ -104,6 +179,7 @@ export default function LoginModal() {
                       {/* Primary */}
                       <Button
                         disabled={isLoading}
+                        usedIn="loginModal"
                         label="Continue"
                         onClick={handleSubmit(onSubmit)}
                       />

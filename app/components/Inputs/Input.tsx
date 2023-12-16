@@ -9,29 +9,35 @@ interface InputProps {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  isInputWrong?: boolean;
+  InputChanged: () => void;
 }
 
 export default function Input({
   id,
   label,
-  type = 'text',
+  type = "text",
   disabled,
   required,
   register,
   errors,
+  isInputWrong,
+  InputChanged
 }: InputProps) {
   return (
     <>
       <div className="w-full relative">
-      <input
+        <div className="flex flex-col gap-4">
+        <input
           id={id}
           disabled={disabled}
           {...register(id, { required })}
           // space is for better floating animation
           placeholder=" "
           type={type}
-          className={`peer w-full p-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-60 disabled:cursor-not-allowed pl-4 
-        ${errors[id] ? `border-slate-600` : `border-neutral-300`}
+          onChange={InputChanged}
+          className={` peer w-full p-4 pt-6 font-light bg-slate-800 text-white border-2 rounded-md outline-none transition disabled:opacity-60 disabled:cursor-not-allowed pl-4 
+        ${errors[id] ? `border-slate-600` : `border-neutral-700`}
         ${errors[id] ? `focus:border-rose-500` : `focus:border-black`}`}
         />
         <label
@@ -40,10 +46,11 @@ export default function Input({
         peer-placeholder-shown:translate-y-0
         peer-focus:scale-75
         peer-focus:-translate-y-4
-        ${errors[id] ? `text-rose-600` : `text-zinc-600`}`}
+        ${isInputWrong ? `text-rose-600` : `text-zinc-100`}`}
         >
           {label}
         </label>
+        </div>
       </div>
     </>
   );

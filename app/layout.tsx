@@ -7,7 +7,6 @@ import Navbar from './components/Navbar/Navbar';
 // import ClientOnly from './components/ClientOnly';
 import LoginModal from './components/Modals/LoginModal';
 import Footer from './components/Footer';
-import useUserState from './hooks/useUserState';
 
 const inter = Inter({ subsets: ['latin'] })
 

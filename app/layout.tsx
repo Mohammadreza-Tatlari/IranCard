@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { Toaster } from 'react-hot-toast';
 
 import Navbar from './components/Navbar/Navbar';
-import ClientOnly from './components/ClientOnly';
+// import ClientOnly from './components/ClientOnly';
 import LoginModal from './components/Modals/LoginModal';
+import Footer from './components/Footer';
+import useUserState from './hooks/useUserState';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,13 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientOnly>
+        <Toaster />
         <Navbar />
         <LoginModal />
-        </ClientOnly>  
-        <div className=""> 
+         <div className='min-h-screen'> 
         {children}
-        </div>
+         </div>
+        <Footer />
         </body>
     </html>
   )

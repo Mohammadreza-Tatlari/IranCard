@@ -2,6 +2,7 @@
 import { dataSample } from "@/app/components/ShopComponents/Shopping";
 import { useRouter } from "next/navigation";
 import PurchaseModal from "@/app/components/Modals/PurchaseModal";
+import { useLayoutEffect } from "react";
 
 interface IParams {
   itemId: string;
@@ -15,8 +16,6 @@ enum STEPS{
 
 export default function page({ params }: { params: IParams }) {
 
-  // const [step, setStep] = useState(STEPS.FactortCheck);
-
   const itemId = params.itemId;
   const receivedData = dataSample;
   if (!params) {
@@ -27,11 +26,13 @@ export default function page({ params }: { params: IParams }) {
 
   return (
     <>
+    <div className="min-h-screen bg-gradient-to-t from-slate-950 to-slate-800">
     <PurchaseModal 
     title={selectedItem?.title}
     price={selectedItem?.price}
     discountAmount={selectedItem?.discount.amount}
     id={selectedItem?.id}/>
+    </div>
     </>
   );
 }

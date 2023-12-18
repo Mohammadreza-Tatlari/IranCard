@@ -1,14 +1,14 @@
 'use client'
 //this component is created to protect the ClientSide Components from dehydration
 // it checks whether it is mounted and if so then demonstrate the Content
-
 import { useEffect, useState } from "react"
+import { PuffLoader } from "react-spinners";
 
 interface ClientOnlyProps{
     children: React.ReactNode;
 }
 
-export default function ClientOnly({children}: ClientOnlyProps) {
+const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
     const [isMounted , setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -16,7 +16,8 @@ export default function ClientOnly({children}: ClientOnlyProps) {
     },[])
 
     if(!isMounted){
-        return null;
+        
+        return <PuffLoader size={50} />;
     }
   return (
     <>
@@ -24,3 +25,4 @@ export default function ClientOnly({children}: ClientOnlyProps) {
     </>
   )
 }
+export default ClientOnly;

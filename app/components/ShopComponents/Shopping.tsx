@@ -3,73 +3,89 @@ import ListingCard from './ListingCard'
 
 export const dataSample = [
   {
-    id: "1",
-    title:"200",
-    price: 1000,
+    id: "0",
+    title:"250",
+    price: "5,000",
+    imagesrc: '/images/5.png',
     discount: {
-    isDiscounted: true ,
-    amount: 20} 
+    isDiscounted: false ,
+    amount: 20,
+    discountedPrice: "50,000"} 
   },
   {
     id: "2",
     title:"500",
-    price: 200000,
+    price: "10,000",
+    imagesrc: '/images/10.png',
     discount: {
-    isDiscounted: true ,
-    amount: 20} 
+    isDiscounted: false ,
+    amount: 20,
+    discountedPrice: "50,000"} 
     
   },
   {
     id: "3",
-    title:"500",
-    price: 30000,
+    title:"1000",
+    price: "20,000",
+    imagesrc: '/images/20.png',
     discount: {
-    isDiscounted: true ,
-    amount: 20} 
+    isDiscounted: false ,
+    amount: 20,
+    discountedPrice: "50,000"} 
     
   },
   {
     id: "4",
-    title:"500",
-    price: 40000,
+    title:"2000",
+    price: "38,000",
+    imagesrc: '/images/38.png',
     discount: {
     isDiscounted: true ,
-    amount: 20} 
+    amount: 20,
+    discountedPrice: "50,000"} 
     
   },
   {
     id: "5",
-    title:"500",
-    price: 450000,
+    title:"5000",
+    price: "90,000",
+    imagesrc: '/images/90.png',
     discount: {
     isDiscounted: true ,
-    amount: 15} 
+    amount: 15,
+    discountedPrice: "50,000"} 
     
   },
   {
     id: "6",
-    title:"500",
-    price: 3600000,
+    title:"7500",
+    price: "129,000",
+    imagesrc: '/images/129.png',
     discount: {
     isDiscounted: true ,
-    amount: 20} 
+    amount: 20,
+    discountedPrice: "50,000"} 
     
   },
   {
     id: "7",
-    title:"500",
-    price: 2420000,
+    title:"10000",
+    price: "165,000",
+    imagesrc: '/images/165.png',
     discount: {
     isDiscounted: true ,
-    amount: 20} 
+    amount: 20,
+    discountedPrice: "50,000"} 
   },
   {
     id: "8",
-    title:"500",
-    price: 500000,
+    title:"20000",
+    price: "315,000",
+    imagesrc: '/images/315.png',
     discount: {
     isDiscounted: true ,
-    amount: 20} 
+    amount: 20,
+    discountedPrice: "50,000"} 
     
   },
   
@@ -77,13 +93,14 @@ export const dataSample = [
 export default function Shopping() {
   return (
     <>
-      <div className='grid grid-cols-1 mx-16 xl:mx-44 2xl:mx-72 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3'>
+      <div className='h-full grid grid-cols-2 mx-1 xl:mx-32 2xl:mx-60 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-5'>
       {dataSample.map((data) => (
         <ListingCard key={data.title}
         itemId={data.id}
         title={data.title}
         price={data.price}
-        discount={data.discount}/>
+        discount={data.discount}
+        imageSrc={data.imagesrc}/>
         ))}
         </div>
     </>

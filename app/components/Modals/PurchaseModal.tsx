@@ -33,16 +33,14 @@ export default function PurchaseModal({
   const [step, setStep] = useState(STEPS.Authentication);
   const userState = useUserState()
   //checking and maintaining JWT
-  const needToVerify = false; //userState.isVerified
+  //const isVerified = false; //userState.isVerified
   const jwtToken = userState.userJWT;
   
-    
-  //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwSUQiOjUsInBLZXkiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkcm1IeXBDU2hsYWtCSjBWVUVhb0pRZyRXajF1eDNpck1hc0lvVVl4WDYyb2tLaEFML2tQRXV0TU9USllNdGluUzVZIiwiaWF0IjoxNzAyMDMyNTk3LCJleHAiOjE3MDIxMTg5OTd9.zAOfXLt3LlIq2AI70uL0DG1lc4dxHM0wkQ65WoEvqZU";
   //will be replace by actual Errors
   const [CodeErrors, setCodeError] = useState<boolean>(false);
+  const [isVerified , setIsVerified] = useState<boolean | undefined>(true) // change this for OTP verification
   const [PhoneError, setPhoneError] = useState<boolean>(false);
   const loginModule = useLoginModal();
-
   const [timer, setTimer] = useState(30);
   const [isTimerActive, setIsTimerActive] = useState(false);
   //form handling
@@ -52,7 +50,10 @@ export default function PurchaseModal({
       code: "",
     },
   });
-
+  //it needs to be turned on again
+  // useEffect(() => {
+  //   setIsVerified(userState.isVerified)
+  // },[userState])
   //needs revision this useEffect cleanup the states when user close the Component
   useEffect(() => {
     return () => {
@@ -60,6 +61,32 @@ export default function PurchaseModal({
       setIsloading(false);
     };
   }, []);
+
+  const handleRequestPayment = async () => {
+    setIsloading(true)
+    setIsTimerActive(true)
+      
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_IRANMTAURL}/shop/createTransaction?itemID=${id}`,
+        undefined,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`
+          }
+        }
+      )
+      if (response.status === 201) {
+        toast.success("در حال ارسال به درگاه")
+        window.location.href = `https://www.zarinpal.com/pg/StartPay/${response.data.authority}`
+      }else 
+        throw response
+    } catch (error) {
+      console.error(error)
+    }
+    setIsloading(false)
+    setIsTimerActive(false)
+  }
 
   const handleSendNumber: SubmitHandler<FieldValues> = async (data) => {
     setIsloading(true);
@@ -96,7 +123,7 @@ export default function PurchaseModal({
     setIsloading(false);
   };
 
-  const onSumbitCode: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmitCode: SubmitHandler<FieldValues> = async (data) => {
     setIsloading(true);
     console.log(data);
     const numberifyCOde = parseInt(data.code);
@@ -116,9 +143,12 @@ export default function PurchaseModal({
       );
 
       if (response.status == 200 || response.data?.message) {
-        toast.success("شماره شما احراض هویت شد");
-        router.push('/checkout')
+        toast.success("شماره شما احراض هویت شده");
+        setIsVerified(true);
+        //router.push('/checkout')
+        //setVerified , verified
         //redirect to payment
+        handleRequestPayment()
       } else {
         toast.error("کد ارائه شده درست نمی باشد", { duration: 3000 });
         setCodeError(true);
@@ -189,11 +219,12 @@ export default function PurchaseModal({
           <Button
             label="ادامه فرایند"
             onClick={() => {
-              if (!needToVerify) {
+              if (isVerified) {
                 //redirect user to final checkout
                 toast.success("شماره شما احراض حویت شده است",{duration: 3000});
                 console.log("authorized User");
-                router.push('/checkout')
+                //router.push('/checkout')
+                handleRequestPayment()
               } else {
                 setStep(STEPS.Authentication);
                 toast.success("نیاز به احراض حویت دارید", {
@@ -301,7 +332,7 @@ export default function PurchaseModal({
               label="بررسی و ادامه"
               onClick={
                 //checks the code OTP and if it is valid then redirect to final checkout
-                handleSubmit(onSumbitCode)
+                handleSubmit(onSubmitCode)
               }
             />
           </div>
@@ -321,7 +352,6 @@ export default function PurchaseModal({
                 <button
                   className="p-1 border-0 hover:opacity-70 transition absolute left-9"
                   onClick={() => {
-                    console.log("close Purchase is clicked");
                     router.push("/Shop");
                   }}
                 >

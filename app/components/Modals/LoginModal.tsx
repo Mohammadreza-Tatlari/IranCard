@@ -88,10 +88,9 @@ export default function LoginModal() {
           secure: true,
           httpOnly: false,
         });
-
         loginModal.onClose();
         toast.success("خوش آمدین", { duration: 1500 });
-        setTimeout(hardReload, 1500);
+         //setTimeout(hardReload, 1500);
       } else {
         console.error("Login Failed with status:", response.status);
       }

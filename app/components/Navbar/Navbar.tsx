@@ -23,13 +23,12 @@ export default function Navbar() {
   //console.log("Cookie User Name is:" , userName);
 
   useEffect(() => {
-    if(userName){
-      setCurrentUser(true)
+    if (userName) {
+      setCurrentUser(true);
+    } else {
+      setCurrentUser(false);
     }
-    else{
-      setCurrentUser(false)
-    }
-  },[currentUser, userName])
+  }, [currentUser, userName]);
 
   function handleHumbergerMenu() {
     setHumbergerMenu(!HumbergerMenu);
@@ -55,27 +54,25 @@ export default function Navbar() {
   const toggleLogin = () => {
     loginModal.onOpen();
   };
-  
+
   function handleSignOut() {
-    router.push('/');
+    router.push("/");
     Cookies.remove("JWTToken", { secure: true, httpOnly: false });
     Cookies.remove("userName", { secure: true, httpOnly: false });
     Cookies.remove("needToVerify", { secure: true, httpOnly: false });
-    toast('به درود',
-  {
-    icon: '👏',
-    style: {
-      borderRadius: '10px',
-      background: '#333',
-      color: '#fff',
-    },
+    toast("به درود", {
+      icon: "👏",
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+    //setTimeout(hardReload, 1000)
   }
-);
-    setTimeout(hardReload, 1000)
-  }
-  
-  function hardReload(){
-    window.location.reload()
+
+  function hardReload() {
+    window.location.reload();
   }
 
   return (
@@ -119,7 +116,8 @@ export default function Navbar() {
             <li>
               <a
                 // onClick={() => router.push("/")}
-                href="https://iranmta.ir/" target="_blank"
+                href="https://iranmta.ir/"
+                target="_blank"
                 className="block py-2 pl-3 pr-4 text-white hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto hover:cursor-pointer transition md:hover:text-indigo-500 focus:text-white "
               >
                 Home

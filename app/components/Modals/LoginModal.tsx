@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Cookies from "js-cookie";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
-
+import { useRouter } from "next/navigation";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useUserState from "@/app/hooks/useUserState";
 
@@ -29,6 +29,7 @@ export default function LoginModal() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
@@ -91,6 +92,9 @@ export default function LoginModal() {
         loginModal.onClose();
         toast.success("خوش آمدین", { duration: 1500 });
          //setTimeout(hardReload, 1500);
+         userState.onSetUserName(userName)
+         reset()
+         
       } else {
         console.error("Login Failed with status:", response.status);
       }

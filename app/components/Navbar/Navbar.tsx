@@ -15,27 +15,30 @@ export default function Navbar() {
     userState.isVerified
   );
   const [HumbergerMenu, setHumbergerMenu] = useState<boolean>(false);
-  const [LoginDropDown, setLoginDropDown] = useState<boolean>(false);
+  const [SignOutDropDown, setSignOutDropDown] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const loginModal = useLoginModal();
   const router = useRouter();
-  const [userName, setUserName] = useState(userState.userName);
-  //console.log("Cookie User Name is:" , userName);
+  const [userName, setUserName] = useState<string | undefined>(userState.userName);
 
   useEffect(() => {
-    if (userName) {
+    if (userName) { 
       setCurrentUser(true);
     } else {
       setCurrentUser(false);
     }
-  }, [currentUser, userName]);
+  }, [currentUser, userName , userState]);
+
+  useEffect(() => {
+    setUserName(userState.userName)
+  }, [userState])
 
   function handleHumbergerMenu() {
     setHumbergerMenu(!HumbergerMenu);
   }
 
-  function handleLoginDropDown() {
-    setLoginDropDown(true);
+  function handleSignOutDropDown() {
+    setSignOutDropDown(true);
   }
 
   //checks if the size is propert to display the feature in Small sized Menu
@@ -55,11 +58,16 @@ export default function Navbar() {
     loginModal.onOpen();
   };
 
+  //this function will remove all the cookies and reset all the global variable that are related to userState
   function handleSignOut() {
     router.push("/");
     Cookies.remove("JWTToken", { secure: true, httpOnly: false });
     Cookies.remove("userName", { secure: true, httpOnly: false });
     Cookies.remove("needToVerify", { secure: true, httpOnly: false });
+    userState.onSetUserName('');
+    setUserName('');
+    setSignOutDropDown(false);
+    setCurrentUser(false);
     toast("به درود", {
       icon: "👏",
       style: {
@@ -71,9 +79,9 @@ export default function Navbar() {
     //setTimeout(hardReload, 1000)
   }
 
-  function hardReload() {
-    window.location.reload();
-  }
+  // function hardReload() {
+  //   window.location.reload();
+  // }
 
   return (
     <nav className="flex-row-reverse block z-50 bg-gradient-to-r from-slate-950 to-slate-800 text-white border-gray-200">
@@ -154,16 +162,16 @@ export default function Navbar() {
               ) : (
                 <LoginButton
                   userName={userName}
-                  onClick={handleLoginDropDown}
+                  onClick={handleSignOutDropDown}
                 />
               )}
               <div
                 onMouseLeave={() => {
-                  setLoginDropDown(false);
+                  setSignOutDropDown(false);
                 }}
                 className={
                   "absolute z-[1000] " +
-                  (LoginDropDown === false ? "hidden" : "") +
+                  (SignOutDropDown === false ? "hidden" : "") +
                   " font-normal bg-slate-900 divide-y  rounded-md shadow w-44 divide-gray-600"
                 }
               >

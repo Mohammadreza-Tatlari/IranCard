@@ -38,7 +38,7 @@ export default function PurchaseModal({
   
   //will be replace by actual Errors
   const [CodeErrors, setCodeError] = useState<boolean>(false);
-  const [isVerified , setIsVerified] = useState<boolean | undefined>(true) // change this for OTP verification
+  const [isVerified , setIsVerified] = useState<boolean | undefined>(false) // change this for OTP verification
   const [PhoneError, setPhoneError] = useState<boolean>(false);
   const loginModule = useLoginModal();
   const [timer, setTimer] = useState(30);
@@ -51,9 +51,9 @@ export default function PurchaseModal({
     },
   });
   //it needs to be turned on again
-  // useEffect(() => {
-  //   setIsVerified(userState.isVerified)
-  // },[userState])
+  useEffect(() => {
+    setIsVerified(userState.isVerified)
+  },[userState])
   //needs revision this useEffect cleanup the states when user close the Component
   useEffect(() => {
     return () => {
@@ -143,9 +143,8 @@ export default function PurchaseModal({
       );
 
       if (response.status == 200 || response.data?.message) {
-        toast.success("شماره شما احراض هویت شده");
+        toast.success(" شماره شما احراض هویت شده است");
         setIsVerified(true);
-        //router.push('/checkout')
         //setVerified , verified
         //redirect to payment
         handleRequestPayment()
@@ -221,13 +220,13 @@ export default function PurchaseModal({
             onClick={() => {
               if (isVerified) {
                 //redirect user to final checkout
-                toast.success("شماره شما احراض حویت شده است",{duration: 3000});
+                toast.success("شماره شما احراض هویت شده است",{duration: 3000});
                 console.log("authorized User");
                 //router.push('/checkout')
                 handleRequestPayment()
               } else {
                 setStep(STEPS.Authentication);
-                toast.success("نیاز به احراض حویت دارید", {
+                toast.success("نیاز به احراض هویت دارید", {
                   style: {
                     border: "1px solid #713200",
                     padding: "16px",
@@ -253,7 +252,7 @@ export default function PurchaseModal({
         <div className="relative p-6 flex-auto">
           <div className="flex flex-col gap-8">
             <div className="text-center">
-              <div className="text-lg font-semibold">احراض حویت</div>
+              <div className="text-lg font-semibold">احراض هویت</div>
             </div>
           </div>
           <div>

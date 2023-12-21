@@ -1,28 +1,17 @@
-'use client'
-//this component is created to protect the ClientSide Components from dehydration
-// it checks whether it is mounted and if so then demonstrate the Content
-import { useEffect, useState } from "react"
-import { PuffLoader } from "react-spinners";
+//this component checks whether we are in SSR or not
+//actaully this is a wrapper for protecting the components from hydration error of NEXTJS
+"use client";
 
-interface ClientOnlyProps{
-    children: React.ReactNode;
+interface CilentOnlyProps {
+  children: React.ReactNode;
 }
+const ClientOnly: React.FC<CilentOnlyProps> = ({ children }) => {
 
-const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
-    const [isMounted , setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    },[])
-
-    if(!isMounted){
-        
-        return <PuffLoader size={50} />;
-    }
-  return (
+  return( 
     <>
-    {children}
-    </>
-  )
-}
+  <div>{children}</div>
+  </>
+  );
+};
+
 export default ClientOnly;

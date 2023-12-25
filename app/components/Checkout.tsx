@@ -24,7 +24,6 @@ export default function Checkout({
       console.log(`Use Effect Called`)
       handleTransaction();
     }
-    
   },[])
   async function handleTransaction() {
     try {

@@ -52,7 +52,7 @@ export default function PurchaseModal({
   });
   //it needs to be turned on again
   useEffect(() => {
-    setIsVerified(userState.isVerified)
+    setIsVerified(!userState.isVerified)
   },[userState])
   //needs revision this useEffect cleanup the states when user close the Component
   useEffect(() => {
@@ -78,7 +78,8 @@ export default function PurchaseModal({
       )
       if (response.status === 201) {
         toast.success("در حال ارسال به درگاه")
-        window.location.href = `https://www.zarinpal.com/pg/StartPay/${response.data.authority}`
+        if (window !== undefined && window.location !== undefined)
+          window.location.href = `https://www.zarinpal.com/pg/StartPay/${response.data.authority}`
       }else 
         throw response
     } catch (error) {
@@ -104,7 +105,6 @@ export default function PurchaseModal({
           },
         }
       );
-      console.log(response.status);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -125,7 +125,6 @@ export default function PurchaseModal({
 
   const onSubmitCode: SubmitHandler<FieldValues> = async (data) => {
     setIsloading(true);
-    console.log(data);
     const numberifyCOde = parseInt(data.code);
     try {
       const response = await axios.put(
@@ -221,7 +220,6 @@ export default function PurchaseModal({
               if (isVerified) {
                 //redirect user to final checkout
                 toast.success("شماره شما احراض هویت شده است",{duration: 3000});
-                console.log("authorized User");
                 //router.push('/checkout')
                 handleRequestPayment()
               } else {

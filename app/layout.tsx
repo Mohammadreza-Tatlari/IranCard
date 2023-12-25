@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import {useState} from 'react'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { Toaster } from 'react-hot-toast';
 
@@ -9,7 +9,30 @@ import LoginModal from './components/Modals/LoginModal';
 import Footer from './components/Footer';
 import ClientOnly from './components/ClientOnly';
 
-const inter = Inter({ subsets: ['latin'] })
+const Inter = localFont({
+  src: [
+    {
+      path:'../public/fonts/Inter-Regular.ttf',
+      weight: '400',
+      style: "normal"
+    },
+    {
+      path:'../public/fonts/Inter-Bold.ttf',
+      weight: '700',
+      style: "bold"
+    },
+    {
+      path:'../public/fonts/Inter-Light.ttf',
+      weight: '300',
+      style: "light"
+    },
+    {
+      path:'../public/fonts/Inter-Medium.ttf',
+      weight: '500',
+      style: "normal"
+    },
+  ]
+})
 
 export const metadata: Metadata = {
   title: 'IranMTA Shop',
@@ -25,7 +48,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={Inter.className}>
         <Toaster />
         <ClientOnly>
         <Navbar />

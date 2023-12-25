@@ -16,7 +16,9 @@ export default function Navbar() {
   );
   const [HumbergerMenu, setHumbergerMenu] = useState<boolean>(false);
   const [SignOutDropDown, setSignOutDropDown] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+  const [isMobile, setIsMobile] = useState(false);
+
   const loginModal = useLoginModal();
   const router = useRouter();
   const [userName, setUserName] = useState<string | undefined>(userState.userName);
@@ -47,7 +49,7 @@ export default function Navbar() {
       setIsMobile(window.innerWidth < 768);
     };
     window.addEventListener("resize", isMobileSized);
-
+    setIsMobile(window.innerWidth < 768)
     // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", isMobileSized);

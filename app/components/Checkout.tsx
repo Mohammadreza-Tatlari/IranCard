@@ -19,13 +19,13 @@ export default function Checkout({
     const [receivedToken, setReceivedToken] = useState("0000-0000-0000-0000-0000");
     const [transactionID, setTransactionID] = useState('');
   //if Status if OK then requesting for token will occur
-  if (Status === "OK") {
-    console.log("encrypted ", encryptedData);
-    console.log("authority" , Authority);
+  useEffect(() => {
+    if (Status === "OK") {
+      console.log(`Use Effect Called`)
+      handleTransaction();
+    }
     
-    handleTransaction();
-  }
-
+  },[])
   async function handleTransaction() {
     try {
       const response = await axios.post(
@@ -35,13 +35,12 @@ export default function Checkout({
           authority: Authority,
         }
       );
-      console.log("transaction response is:", response);
       
-      console.log("transaction" , response.data.transactionID);
       setReceivedToken(response.data.code)
       setTransactionID(response.data.transactionID);
     } catch (error: any) {
       console.log(error);
+      toast.error("مشکلی در هنگام ساخت کد شما به وجود آمده است،")
     }
   }
   if (Status == "NOK") {

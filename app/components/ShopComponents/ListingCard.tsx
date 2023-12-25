@@ -28,7 +28,6 @@ export default function ListingCard({
   const router = useRouter()
   const userState = useUserState()
   const LoginModal = useLoginModal();
-  console.log("userName in Listings" , userState.userName);
   // this state checks if the user is logged out again then the Items are not available to buy so the LoginModal will pop up
   const [userExist,setUserExist] = useState<string | undefined>(userState.userName);
   useEffect(() => {

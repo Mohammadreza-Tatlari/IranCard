@@ -25,3 +25,18 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+
+/* search for .swiper-pagination-bullet in files and change the pagination bullet colors*/
+.swiper-pagination-bullet-inactive {
+  background-color: #441df1 !important;
+}
+
+.swiper-pagination-bullet {
+  width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 8px));
+  height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 8px));
+  display: inline-block;
+  border-radius: var(--swiper-pagination-bullet-border-radius, 50%);
+  background: var(--swiper-pagination-bullet-inactive-color, #d6d6d6) !important;
+  opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.2);
+}

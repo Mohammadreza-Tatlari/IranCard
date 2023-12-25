@@ -53,7 +53,6 @@ export default function LoginModal() {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsloading(true);
-    console.log(data);
     //here is where the API call that sends data to backend should be set
     try {
       const response = await axios({
@@ -109,7 +108,8 @@ export default function LoginModal() {
     setIsloading(false);
   };
   function hardReload() {
-    window.location.reload();
+    if (window !== undefined && window.location !== undefined)
+      window.location.reload();
   }
   //for showing and hiding password
   const toggleShowPass = useCallback(() => {

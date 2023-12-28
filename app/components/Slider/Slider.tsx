@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
+
 import { FreeMode, Pagination, Autoplay , EffectCoverflow } from "swiper/modules";
 import { dataSample } from "../ShopComponents/Shopping";
 import ListingCard from "../ShopComponents/ListingCard";

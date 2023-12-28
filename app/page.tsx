@@ -1,5 +1,4 @@
 'use client'
-import Shopping from "./components/ShopComponents/Shopping";
 import Slider from "./components/Slider/Slider";
 
 export default function Home() {

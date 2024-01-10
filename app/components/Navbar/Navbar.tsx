@@ -86,7 +86,7 @@ export default function Navbar() {
   // }
 
   return (
-    <nav className=" flex-row-reverse block z-50 bg-gradient-to-r from-slate-950 to-slate-800 text-white border-gray-200">
+    <nav className=" flex-row-reverse block z-50 bg-gradient-to-tr from-slate-950 to-slate-800 text-white border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-around max-md:justify-between mx-auto p-4">
          <Link href="/" className="flex items-center"> 
            <LoginButton userName="IRAN MTA SHOP" onClick={() => {}} />
@@ -176,11 +176,17 @@ export default function Navbar() {
                 }
               >
                 <ul className="py-2 text-sm text-white">
+                <li
+                    className="px-4 py-2 hover:cursor-pointer hover:text-indigo-300"
+                    onClick={() => router.push("/Transactions")}
+                  >
+                    تراکنش ها
+                  </li>
                   <li
                     className="px-4 py-2 hover:cursor-pointer hover:text-indigo-300"
                     onClick={handleSignOut}
                   >
-                    Sign Out
+                    خروج
                   </li>
                 </ul>
               </div>

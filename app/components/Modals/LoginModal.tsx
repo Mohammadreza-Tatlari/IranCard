@@ -138,19 +138,19 @@ export default function LoginModal() {
                   >
                     <IoMdClose size={18} />
                   </button>
-                  <div className="text-lg font-semibold">Login</div>
+                  <div className="text-lg font-semibold">ورود</div>
                 </div>
                 <div>
                   {/* Body Content Start*/}
                   <div className="relative p-6 flex-auto">
                     <div className="flex flex-col gap-4">
                       <Heading
-                        title="Welcome to IranMTA"
-                        subtitle="Login to your Account"
+                        title="به ایران ام تی ای خوش آمدید"
+                        subtitle="به اکانت خود وارد شوید"
                       />
                       <Input
                         id="name"
-                        label="name"
+                        label="نام"
                         disabled={isLoading}
                         register={register}
                         errors={errors}
@@ -160,7 +160,7 @@ export default function LoginModal() {
                       />
                       <Input
                         id="password"
-                        label="password"
+                        label="رمزعبور"
                         disabled={isLoading}
                         register={register}
                         errors={errors}
@@ -170,7 +170,7 @@ export default function LoginModal() {
                         required
                       />
                       <div className="flex flex-row gap-1">
-                        <p>show Password</p>
+                        <p>نمایش رمز</p>
                         <input type="checkbox" onClick={toggleShowPass} />
                       </div>
                     </div>

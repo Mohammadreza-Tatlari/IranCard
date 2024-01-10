@@ -162,12 +162,18 @@ export default function Navbar() {
                 }
               >
                 <ul className="py-2 text-sm text-white">
+                <li
+                    className="px-4 py-2 hover:cursor-pointer hover:text-indigo-300"
+                    onClick={() => router.push("/Transactions")}
+                  >
+                     تراکنش ها
+                  </li>
                   <li
                     className="px-4 py-2 hover:cursor-pointer hover:text-indigo-300"
                     onClick={handleSignOut}
                   >
-                    Sign Out
-                  </li>
+                    خروج
+                  </li>                 
                 </ul>
               </div>
              </div>

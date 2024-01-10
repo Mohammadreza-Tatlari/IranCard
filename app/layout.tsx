@@ -54,7 +54,7 @@ export default function RootLayout({
         <Navbar />
         <LoginModal />
         </ClientOnly>
-         <div className='min-h-screen'> 
+         <div className=''> 
         {children}
          </div>
         <Footer />

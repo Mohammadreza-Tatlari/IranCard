@@ -37,7 +37,7 @@ export default function TransactionTable() {
   return (
     <div className='min-h-screen bg-gradient-to-t from-slate-950 to-slate-800'>
         <div className='p-20'>
-            <table className='table-auto w-full border-collapse '>
+            <table dir='rtl' className='table-auto w-full border-collapse '>
                 <thead>
                     <tr className='bg-slate-800 text-white'>
                         <td className='p-2 pl-4'>شماره سفارش</td>

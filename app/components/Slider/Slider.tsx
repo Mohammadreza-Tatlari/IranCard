@@ -10,26 +10,9 @@ import { dataSample } from "../ShopComponents/Shopping";
 import ListingCard from "../ShopComponents/ListingCard";
 const samples = dataSample;
 
-export default function Slider({receivedData}:any) {
+export default function Slider({receivedData , usedInHome}:any) {
 
-  // const [thisData , setThisData] = useState(receivedData)
-  // useEffect(() => {
-  //   if(receivedData){
-  //   setThisData(receivedData)
-  //   }
-  // },[receivedData]);
-  
-  // useEffect(() => {
-  //   const refreshTimer = setTimeout(() => {
-  //     // Force a refresh by updating the state
-  //     setThisData([...thisData]);
-  //   }, 1000);
 
-  //   // Clear the timer to avoid memory leaks
-  //   return () => clearTimeout(refreshTimer);
-  // }, [thisData]);
-
-  
   return (
     <div className="p-3 ">
       <div className="flex flex-col items-center justify-center h-auto">
@@ -69,6 +52,7 @@ export default function Slider({receivedData}:any) {
             {samples.map((data:any) => (
               <SwiperSlide key={data.id}>
                 <div className="mb-20">
+                  {/* because data is being passed to components it may have some flaws */}
                   <ListingCard
                     itemId={data.id}
                     title={data.title}

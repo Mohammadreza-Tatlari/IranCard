@@ -18,7 +18,7 @@ export default function Home() {
         <div className="h-full pt-3 pb-14 ">
           {
             windowsSize > 1024 &&
-           <Slider receivedData={dataSample} usedInHome={true}/>
+           <Slider/>
           }
           {
             windowsSize < 1024 &&

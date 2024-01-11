@@ -40,3 +40,12 @@ body {
   background: var(--swiper-pagination-bullet-inactive-color, #d6d6d6) !important;
   opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.2);
 }
+
+.swiper-button-next {
+  margin-right: -12px !important;
+  z-index: 100 !important;
+}
+.swiper-button-prev {
+  margin-left: -12px !important;
+  z-index: 100 !important;
+}

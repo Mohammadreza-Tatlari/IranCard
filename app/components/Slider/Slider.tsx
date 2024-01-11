@@ -4,19 +4,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
+import 'swiper/css/navigation';
 
-import { FreeMode, Pagination, Autoplay , EffectCoverflow } from "swiper/modules";
+import { FreeMode, Pagination, Autoplay , EffectCoverflow , Navigation} from "swiper/modules";
 import { dataSample } from "../ShopComponents/Shopping";
 import ListingCard from "../ShopComponents/ListingCard";
-const samples = dataSample;
+import SliderCard from "./SliderCard";
 
-export default function Slider({receivedData , usedInHome}:any) {
+const sample = dataSample
 
+export default function Slider() {
 
   return (
     <div className="p-3 ">
       <div className="flex flex-col items-center justify-center h-auto">
           <Swiper
+          navigation={true}
           effect={'coverflow'}
           grabCursor={true}
           centeredSlides={true}
@@ -38,7 +41,7 @@ export default function Slider({receivedData , usedInHome}:any) {
                 spaceBetween: 15,
               },
               700: {
-                slidesPerView: 4,
+                slidesPerView: 5, //can be changed to 4
                 spaceBetween: 15,
               },
             }}
@@ -46,20 +49,14 @@ export default function Slider({receivedData , usedInHome}:any) {
             pagination={{
               clickable: true,
             }}
-            modules={[FreeMode, Pagination, Autoplay , EffectCoverflow]}
-            className="max-w-[%90] lg:max-w-[80%] "
+            modules={[FreeMode, Pagination, Autoplay , EffectCoverflow , Navigation]}
+            className="lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] max-w-[80%]"
           >
-            {samples.map((data:any) => (
+            {sample.map((data:any) => (
               <SwiperSlide key={data.id}>
-                <div className="mb-20">
+                <div className="mb-20 pt-4">
                   {/* because data is being passed to components it may have some flaws */}
-                  <ListingCard
-                    itemId={data.id}
-                    title={data.title}
-                    price={data.price}
-                    discount={data.discount}
-                    imageSrc={data.imagesrc}
-                  />
+                   <SliderCard imageSrc={data.SliderImage} itemId={data.id} discount={data.discount}/>
                 </div>
               </SwiperSlide>
             ))}

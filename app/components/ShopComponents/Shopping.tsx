@@ -7,6 +7,7 @@ export const dataSample = [
     title:"250",
     price: "5,000",
     imagesrc: '/images/5.png',
+    SliderImage: '/slides/1.png',
     discount: {
     isDiscounted: false ,
     amount: 20,
@@ -17,6 +18,7 @@ export const dataSample = [
     title:"500",
     price: "10,000",
     imagesrc: '/images/10.png',
+    SliderImage: '/slides/2.png',
     discount: {
     isDiscounted: false ,
     amount: 20,
@@ -28,6 +30,7 @@ export const dataSample = [
     title:"1000",
     price: "20,000",
     imagesrc: '/images/20.png',
+    SliderImage: '/slides/3.png',
     discount: {
     isDiscounted: false ,
     amount: 20,
@@ -39,6 +42,7 @@ export const dataSample = [
     title:"2000",
     price: "38,000",
     imagesrc: '/images/38.png',
+    SliderImage: '/slides/4.png',
     discount: {
     isDiscounted: true ,
     amount: 20,
@@ -49,7 +53,8 @@ export const dataSample = [
     id: "5",
     title:"5000",
     price: "90,000",
-    imagesrc: '/images/90.png',
+    imagesrc: '/images/5.png',
+    SliderImage: '/slides/5.png',
     discount: {
     isDiscounted: true ,
     amount: 15,
@@ -61,6 +66,7 @@ export const dataSample = [
     title:"7500",
     price: "129,000",
     imagesrc: '/images/129.png',
+    SliderImage: '/slides/6.png',
     discount: {
     isDiscounted: true ,
     amount: 20,
@@ -72,6 +78,7 @@ export const dataSample = [
     title:"10000",
     price: "165,000",
     imagesrc: '/images/165.png',
+    SliderImage: '/slides/7.png',
     discount: {
     isDiscounted: true ,
     amount: 20,
@@ -82,6 +89,7 @@ export const dataSample = [
     title:"20000",
     price: "315,000",
     imagesrc: '/images/315.png',
+    SliderImage: '/slides/8.png',
     discount: {
     isDiscounted: true ,
     amount: 20,

@@ -1,6 +1,7 @@
 import React from 'react'
 import ListingCard from './ListingCard'
 
+//images of this data sample needs modification
 export const dataSample = [
   {
     id: "0",

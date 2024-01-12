@@ -50,7 +50,7 @@ export default function ListingCard({
         <div className="flex flex-col gap-2 w-full">
           <div className="aspect-square w-full relative overflow-hidden rounded-md">
             <Image
-              className="object-cover h-full w-full group-hover:scale-105 transition"
+              className="object-center h-full w-full group-hover:scale-105 transition"
               alt="IranCard"
               src={imageSrc}
               fill

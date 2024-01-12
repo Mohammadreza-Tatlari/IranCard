@@ -14,7 +14,8 @@ window.addEventListener('resize' , changeSize);
 export default function Home() {
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-t from-[#04141c] to-[#15233b]">
+      <div className="min-h-screen bg-[url('https://f4.bcbits.com/img/a0675344416_16.jpg')] bg-cover bg-center ">
+        <div className="bg-slate-400/40 min-h-screen">
         <div className="h-full pt-3 pb-14 ">
           {
             windowsSize > 1024 &&
@@ -25,6 +26,7 @@ export default function Home() {
             <Shopping />
           }
           {/* <Shopping /> */}
+        </div>
         </div>
       </div>
     </>

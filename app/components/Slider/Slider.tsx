@@ -66,7 +66,7 @@ export default function Slider() {
             pagination={{
               clickable: true,
             }}
-            modules={[FreeMode, Pagination, Autoplay , EffectCoverflow , Navigation]}
+            modules={[FreeMode, Pagination, EffectCoverflow , Navigation]}
             className="lg:max-w-[80%] md:max-w-[80%] max-w-[100%]"
           >
             {sample.map((data:any) => (
